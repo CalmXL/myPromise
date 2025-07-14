@@ -27,5 +27,24 @@ class XLPromise {
       this.value = reason
     }
   }
+
+  then(onFulfilled, onRejected) {
+
+    if (typeof onFulfilled !== 'function') {
+      onFulfilled = () => { }
+    }
+
+    if (typeof onRejected !== 'function') {
+      onRejected = () => { }
+    }
+
+    if (this.status === XLPromise.FULFILLED) {
+      onFulfilled(this.value)
+    }
+
+    if (this.status === XLPromise.REJECTED) {
+      onRejected(this.value)
+    }
+  }
 }
 
