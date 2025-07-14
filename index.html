@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,14 +12,16 @@
   <script>
 
     const p = new XLPromise((resolve, reject) => {
-      resolve(11)
-      // reject(121)
+      setTimeout(() => {
+        resolve(11)
+      }, 1000)
     }).then(
       res => {
-        console.log(abc);
         console.log(res);
       }
     )
+
+    console.log('xl');
   </script>
 </body>
 

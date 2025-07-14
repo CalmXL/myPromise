@@ -6,6 +6,7 @@ class XLPromise {
   constructor(executor) {
     this.status = XLPromise.PENDING
     this.value = null
+    this.callbacks = []
 
     try {
       executor(this.resolve.bind(this), this.reject.bind(this))
@@ -18,6 +19,9 @@ class XLPromise {
     if (this.status === XLPromise.PENDING) {
       this.status = XLPromise.FULFILLED
       this.value = value;
+      this.callbacks.map((callback) => {
+        callback.onFulfilled(this.value)
+      })
     }
   }
 
@@ -25,6 +29,9 @@ class XLPromise {
     if (this.status === XLPromise.PENDING) {
       this.status = XLPromise.REJECTED
       this.value = reason
+      this.callbacks.map((callback) => {
+        callback.onRejected(this.value)
+      })
     }
   }
 
@@ -36,6 +43,13 @@ class XLPromise {
 
     if (typeof onRejected !== 'function') {
       onRejected = () => { }
+    }
+
+    if (this.status === XLPromise.PENDING) {
+      this.callbacks.push({
+        onFulfilled,
+        onRejected
+      })
     }
 
     if (this.status === XLPromise.FULFILLED) {

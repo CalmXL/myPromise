@@ -1,8 +1,13 @@
 <script>
   new Promise((resolve, reject) => {
-    resolve(11)
+    // resolve(11)
+    setTimeout(() => {
+      resolve(11)
+    }, 1000)
   }).then(res => {
-    console.log(abc);
     console.log(res);
   })
+
+  console.log('xl');
+
 </script>
