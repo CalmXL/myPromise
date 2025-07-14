@@ -7,17 +7,25 @@ class XLPromise {
     this.status = XLPromise.PENDING
     this.value = null
 
-    executor(this.resolve.bind(this), this.reject.bind(this))
+    try {
+      executor(this.resolve.bind(this), this.reject.bind(this))
+    } catch (err) {
+      this.reject(err)
+    }
   }
 
   resolve(value) {
-    this.status = XLPromise.FULFILLED
-    this.value = value;
+    if (this.status === XLPromise.PENDING) {
+      this.status = XLPromise.FULFILLED
+      this.value = value;
+    }
   }
 
   reject(reason) {
-    this.status = XLPromise.REJECTED
-    this.value = reason
+    if (this.status === XLPromise.PENDING) {
+      this.status = XLPromise.REJECTED
+      this.value = reason
+    }
   }
 }
 

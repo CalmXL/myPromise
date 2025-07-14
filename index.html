@@ -12,7 +12,10 @@
 <body>
   <script>
     const p = new XLPromise((resolve, reject) => {
-      resolve(11)
+      // resolve(11)
+      // reject(12)
+
+      throw new Error('err')
     })
 
     console.log(p);
