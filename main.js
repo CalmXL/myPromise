@@ -39,11 +39,24 @@ class XLPromise {
     }
 
     if (this.status === XLPromise.FULFILLED) {
-      onFulfilled(this.value)
+      setTimeout(() => {
+        try {
+          onFulfilled(this.value)
+        } catch (err) {
+          onRejected(err)
+        }
+      })
+
     }
 
     if (this.status === XLPromise.REJECTED) {
-      onRejected(this.value)
+      setTimeout(() => {
+        try {
+          onRejected(this.value)
+        } catch (err) {
+          onRejected(err)
+        }
+      })
     }
   }
 }

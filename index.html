@@ -11,13 +11,16 @@
 
 <body>
   <script>
-    const p = new XLPromise((resolve, reject) => {
-      console.log(a);
-      resolve(11)
-      // reject(12)
-    })
 
-    console.log(p);
+    const p = new XLPromise((resolve, reject) => {
+      resolve(11)
+      // reject(121)
+    }).then(
+      res => {
+        console.log(abc);
+        console.log(res);
+      }
+    )
   </script>
 </body>
 
