@@ -12,7 +12,9 @@
 <body>
   <script>
     const p = new XLPromise((resolve, reject) => {
+      console.log(a);
       resolve(11)
+      // reject(12)
     })
 
     console.log(p);
