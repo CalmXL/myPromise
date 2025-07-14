@@ -3,11 +3,13 @@
     // resolve(11)
     setTimeout(() => {
       resolve(11)
+      console.log('xh');
     }, 1000)
   }).then(res => {
     console.log(res);
+  }, (reason) => {
+    console.log(reason);
   })
 
   console.log('xl');
-
 </script>

@@ -19,8 +19,10 @@ class XLPromise {
     if (this.status === XLPromise.PENDING) {
       this.status = XLPromise.FULFILLED
       this.value = value;
-      this.callbacks.map((callback) => {
-        callback.onFulfilled(this.value)
+      setTimeout(() => {
+        this.callbacks.map((callback) => {
+          callback.onFulfilled(this.value)
+        })
       })
     }
   }
@@ -29,8 +31,10 @@ class XLPromise {
     if (this.status === XLPromise.PENDING) {
       this.status = XLPromise.REJECTED
       this.value = reason
-      this.callbacks.map((callback) => {
-        callback.onRejected(this.value)
+      setTimeout(() => {
+        this.callbacks.map((callback) => {
+          callback.onRejected(this.value)
+        })
       })
     }
   }
