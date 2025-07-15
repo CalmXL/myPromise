@@ -41,11 +41,11 @@ class XLPromise {
 
   then(onFulfilled, onRejected) {
     if (typeof onFulfilled !== 'function') {
-      onFulfilled = () => { }
+      onFulfilled = () => this.value
     }
 
     if (typeof onRejected !== 'function') {
-      onRejected = () => { }
+      onRejected = () => this.value
     }
 
     return new XLPromise((resolve, reject) => {
