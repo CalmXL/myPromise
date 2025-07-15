@@ -1,15 +1,16 @@
 <script>
   new Promise((resolve, reject) => {
-    // resolve(11)
     setTimeout(() => {
-      resolve(11)
-      console.log('xh');
+      // resolve(11)
+      reject(11)
     }, 1000)
   }).then(res => {
     console.log(res);
+    return 'xh'
   }, (reason) => {
     console.log(reason);
+    return 'xl'
+  }).then(res => {
+    console.log(res);
   })
-
-  console.log('xl');
 </script>

@@ -40,7 +40,6 @@ class XLPromise {
   }
 
   then(onFulfilled, onRejected) {
-
     if (typeof onFulfilled !== 'function') {
       onFulfilled = () => { }
     }
@@ -49,33 +48,38 @@ class XLPromise {
       onRejected = () => { }
     }
 
-    if (this.status === XLPromise.PENDING) {
-      this.callbacks.push({
-        onFulfilled,
-        onRejected
-      })
-    }
+    return new XLPromise((resolve, reject) => {
+      if (this.status === XLPromise.PENDING) {
+        this.callbacks.push({
+          onFulfilled,
+          onRejected
+        })
+      }
 
-    if (this.status === XLPromise.FULFILLED) {
-      setTimeout(() => {
-        try {
-          onFulfilled(this.value)
-        } catch (err) {
-          onRejected(err)
-        }
-      })
+      if (this.status === XLPromise.FULFILLED) {
+        console.log('fulfilled');
+        setTimeout(() => {
+          try {
+            const result = onFulfilled(this.value)
+            resolve(result)
+          } catch (err) {
+            reject(err)
+          }
+        })
+      }
 
-    }
-
-    if (this.status === XLPromise.REJECTED) {
-      setTimeout(() => {
-        try {
-          onRejected(this.value)
-        } catch (err) {
-          onRejected(err)
-        }
-      })
-    }
+      if (this.status === XLPromise.REJECTED) {
+        console.log('rejected');
+        setTimeout(() => {
+          try {
+            const result = onRejected(this.value)
+            resolve(result)
+          } catch (err) {
+            reject(err)
+          }
+        })
+      }
+    })
   }
 }
 

@@ -12,17 +12,19 @@
   <script>
 
     const p = new XLPromise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(11)
-        console.log('xh');
-      }, 1000)
+      reject(12)
     }).then(
       res => {
         console.log(res);
+        return 'xh'
+      },
+      reason => {
+        console.log(reason);
+        return 'reject'
       }
-    )
-
-    console.log('xl');
+    ).then((value) => {
+      console.log(value);
+    })
   </script>
 </body>
 
